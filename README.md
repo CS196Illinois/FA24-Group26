@@ -6,3 +6,10 @@ Group Name: TEAM_NAME
 Team Members: STUDENTS_NETIDS
 
 Project Manager: PM_NETID
+
+Team Members:
+cbcui
+kellyyi2
+lilypepper
+hnanna2
+kvaidya3
