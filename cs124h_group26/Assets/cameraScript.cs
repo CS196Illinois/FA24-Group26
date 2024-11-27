@@ -35,19 +35,24 @@ public class cameraScript : MonoBehaviour
     }*/
 
     public Toggle[] checkboxes;
-    public float moveSpeed = 7f;
+    public float moveSpeed;
     private Vector3[] targetPositions;
     int xPos = 300; 
+    int zPos = 650; 
 
     void Start() {
         targetPositions = new Vector3[checkboxes.Length];
         for(int i = 0; i < checkboxes.Length; i++) {
             if (i % 2 == 0) {
-                targetPositions[i] = new Vector3(xPos + 200, 0, 500);
+                targetPositions[i] = new Vector3(xPos + 150, 0, zPos - 100);
+                xPos = xPos + 150;
+                zPos = zPos - 100;
                 int index = i;
                 checkboxes[i].onValueChanged.AddListener(delegate { OnCheckboxChanged(index); });
             } else {
-                targetPositions[i] = new Vector3(xPos - 400, 50, 500);
+                targetPositions[i] = new Vector3(xPos - 350, 0, zPos - 100);
+                xPos = xPos - 350;
+                zPos = zPos - 100;
                 int index = i;
                 checkboxes[i].onValueChanged.AddListener(delegate { OnCheckboxChanged(index); });
             }
@@ -56,7 +61,12 @@ public class cameraScript : MonoBehaviour
 
     void OnCheckboxChanged(int index) {
         if (checkboxes[index].isOn) {
-            checkboxes[index].gameObject.SetActive(false);
+            if (index == checkboxes.Length - 1) {
+                checkboxes[index].gameObject.SetActive(false);
+            } else {
+                checkboxes[index].gameObject.SetActive(false);
+                checkboxes[index + 1].gameObject.SetActive(true);
+            }
             StartCoroutine(MoveCameraToTarget(targetPositions[index]));
         }
     }
