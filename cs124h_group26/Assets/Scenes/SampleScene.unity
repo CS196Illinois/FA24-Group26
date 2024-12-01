@@ -1101,11 +1101,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1134025843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04db502f3a7cd47f39196ccd62351857, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dd3834917015425f8feb688cbb4aa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckBox: {fileID: 1511546939}
-  targetPos: {x: 460, y: 55, z: -100}
+  tasks:
+  - checkbox: {fileID: 1511546939}
+    position: {x: 440, y: 30, z: -110}
+  - checkbox: {fileID: 856100184}
+    position: {x: 0, y: 0, z: 0}
+  - checkbox: {fileID: 1900548628}
+    position: {x: 0, y: 0, z: 0}
+  - checkbox: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
   moveSpeed: 5
 --- !u!1 &1143843324
 GameObject:
