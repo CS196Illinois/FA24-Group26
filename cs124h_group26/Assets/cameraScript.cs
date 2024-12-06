@@ -33,32 +33,45 @@ public class cameraScript : MonoBehaviour
         }
         transform.position = newPos;
     }*/
-
+    //array of checkboxes to loop through
     public Toggle[] checkboxes;
     public float moveSpeed;
+    //array of positions linked to respective checkbox
     private Vector3[] targetPositions;
     int xPos = 300; 
     int zPos = 650; 
 
     void Start() {
         targetPositions = new Vector3[checkboxes.Length];
+        //looping through checkboxes
         for(int i = 0; i < checkboxes.Length; i++) {
-            if (i % 2 == 0) {
+            //limiting to 4 treehouses, so once past the tasks
+            //will just move back towards feild
+            if (i < 3) {
+                //even
+                if (i % 2 == 0) {
                 targetPositions[i] = new Vector3(xPos + 150, 0, zPos - 100);
                 xPos = xPos + 150;
                 zPos = zPos - 100;
                 int index = i;
                 checkboxes[i].onValueChanged.AddListener(delegate { OnCheckboxChanged(index); });
             } else {
+                //odd
                 targetPositions[i] = new Vector3(xPos - 350, 0, zPos - 100);
                 xPos = xPos - 350;
                 zPos = zPos - 100;
                 int index = i;
                 checkboxes[i].onValueChanged.AddListener(delegate { OnCheckboxChanged(index); });
             }
+            } else {
+                //final move to feild
+                targetPositions[i] = new Vector3(xPos, 0, zPos - 200);
+                zPos = zPos - 200;
+            }
         }
     }
 
+    //continuously checking if checkbox is checked
     void OnCheckboxChanged(int index) {
         if (checkboxes[index].isOn) {
             if (index == checkboxes.Length - 1) {
@@ -75,6 +88,7 @@ public class cameraScript : MonoBehaviour
         float timeElapsed = 0;
 
         while (timeElapsed < 1f) {
+            //lerp is frictional distance
             transform.position = Vector3.Lerp(startPos, target, timeElapsed);
             timeElapsed += Time.deltaTime * moveSpeed;
             yield return null;
